@@ -77,6 +77,16 @@ for (const btnInterview of btnInterviews) {
   });
 };
 
+function tab1input(){
+        availableJobCounter.innerText = tab1 + ' jobs';
+}
+function tab2input(){
+        availableJobCounter.innerText = interviewCounter.innerText + ' of ' + tab1 + ' jobs';
+}
+function tab3input(){
+        availableJobCounter.innerText = rejectedCounter.innerText + ' of ' + tab1 + ' jobs';
+}
+
 ///////////////////////////////// REJECTED BUTTON /////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 const btnRejectedAll = document.querySelectorAll('.btn-error');
@@ -115,4 +125,20 @@ for (const btnRejected of btnRejectedAll) {
         };
 
   });
+};
+
+///////////////////////////////// REJECTED BUTTON Toggle /////////////////////////
+//==================================================================================
+const btnRejectedAlltab3id = tab3id.querySelectorAll('.btn-accent');
+
+for (const btnRejectedtab3id of btnRejectedAlltab3id) {
+btnRejectedtab3id.addEventListener('click', function(event){
+    console.log('kisu akta');
+    // const cardRtoI = event.target.closest('.card');
+    // // badge change
+    // const badgeRtoI = cardRtoI.querySelector('.dim-btn');
+    // badgeRtoI.classList.add('btn-accent');
+    // badgeRtoI.classList.remove('btn-error');
+    // badgeRtoI.innerText = 'INTERVIEW';
+});
 };
