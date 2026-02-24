@@ -9,6 +9,8 @@ const availableJobCounter = document.getElementById('available-job-counter');
 // get: delete icon btn
 const btnTrashIcons = document.querySelectorAll('.fa-trash');
 const tab1EmptyCard = document.getElementById('empty-card-for-all-tab');
+const tab2EmptyCard = document.getElementById('card-empty-tab2');
+const tab3EmptyCard = document.getElementById('card-empty-tab3');
 
 
 // exiqution: counter added
@@ -30,7 +32,7 @@ for (const btnTrashIcon of btnTrashIcons) {
         availableJobCounter.innerText = tab1 + ' jobs';
 
         // ex: empty card
-        if(totalCounter.innerText == 0){
+        if (totalCounter.innerText == 0) {
             tab1EmptyCard.classList.remove('hidden');
         }
     });
@@ -38,16 +40,42 @@ for (const btnTrashIcon of btnTrashIcons) {
 
 ///////////////////////////////// Dual button /////////////////////////
 const btnInterviews = document.querySelectorAll('.btn-accent');
+const tab2id = document.getElementById('tab2');
 
-for(const btnInterview of btnInterviews){
-    btnInterview.addEventListener('click', function(event){
-    const btnInterviewDele = event.target.closest('.card');
-    const btnInterviewDeleChild = btnInterviewDele.querySelector('.dim-btn');
-    btnInterviewDeleChild.classList.add('btn-accent');
-    btnInterviewDeleChild.classList.remove('btn-soft');
-    btnInterviewDeleChild.innerText = ('INTERVIEW');
-});
-};
+for (const btnInterview of btnInterviews) {
+  btnInterview.addEventListener('click', function(event) {
+
+    const card = event.target.closest('.card');
+
+    // already clicked before --> stop everything
+    if (card.dataset.interviewed === "true") return;
+
+    // mark as processed
+    card.dataset.interviewed = "true";
+
+
+    // badge change
+    const badge = card.querySelector('.dim-btn');
+    badge.classList.add('btn-accent');
+    badge.classList.remove('btn-soft');
+    badge.innerText = 'INTERVIEW';
+
+
+    // clone card
+    const clone = card.cloneNode(true);
+    tab2id.appendChild(clone);
+
+    // counter update
+    const tab2 = document.querySelectorAll('#tab2 .card').length;
+    interviewCounter.innerText = tab2;
+
+    // ex: empty card
+        if (interviewCounter.innerText > 0) {
+            tab2EmptyCard.classList.add('hidden');
+        }
+
+  });
+}
 
 
 
