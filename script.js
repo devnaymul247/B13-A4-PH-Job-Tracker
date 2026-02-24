@@ -38,7 +38,7 @@ for (const btnTrashIcon of btnTrashIcons) {
     });
 };
 
-///////////////////////////////// Dual button /////////////////////////
+///////////////////////////// INTERVIEW BUTTON /////////////////////////
 const btnInterviews = document.querySelectorAll('.btn-accent');
 const tab2id = document.getElementById('tab2');
 
@@ -72,11 +72,47 @@ for (const btnInterview of btnInterviews) {
     // ex: empty card
         if (interviewCounter.innerText > 0) {
             tab2EmptyCard.classList.add('hidden');
-        }
+        };
 
   });
-}
+};
+
+///////////////////////////////// REJECTED BUTTON /////////////////////////
+///////////////////////////////////////////////////////////////////////////
+const btnRejectedAll = document.querySelectorAll('.btn-error');
+const tab3id = document.getElementById('tab3');
+
+for (const btnRejected of btnRejectedAll) {
+  btnRejected.addEventListener('click', function(event) {
+
+    const cardOfReject = event.target.closest('.card');
+
+    // already clicked before --> stop everything
+    if (cardOfReject.dataset.interviewed === "true") return;
+
+    // mark as processed
+    cardOfReject.dataset.interviewed = "true";
 
 
+    // badge change
+    const badgeOfReject = cardOfReject.querySelector('.dim-btn');
+    badgeOfReject.classList.add('btn-error');
+    badgeOfReject.classList.remove('btn-soft');
+    badgeOfReject.innerText = 'REJECTED';
 
 
+    // clone card
+    const clone = cardOfReject.cloneNode(true);
+    tab3id.appendChild(clone);
+
+    // counter update
+    const tab3 = document.querySelectorAll('#tab3 .card').length;
+    rejectedCounter.innerText = tab3;
+
+    // ex: empty card
+        if (rejectedCounter.innerText > 0) {
+            tab3EmptyCard.classList.add('hidden');
+        };
+
+  });
+};
